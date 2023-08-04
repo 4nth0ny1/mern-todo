@@ -24,3 +24,16 @@ Change the scripts in package.json to
 
 now you can run the server with nodemon
 npm run start
+
+## dotenv
+
+add to the index.js file
+
+```
+const dotenv = require("dotenv");
+dotenv.config();
+
+console.log(process.env.MONGODB_URI);
+```
+
+create .env file in /server
