@@ -1,11 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
-dotenv.config();
+const morgan = require("morgan");
 
-console.log(process.env.MONGODB_URI);
+dotenv.config();
 
 // setup express server
 const app = express();
+
+app.use(morgan("tiny"));
 
 app.get("/todos", (req, res) => {
   res.send("hello again");
