@@ -41,3 +41,5 @@ create .env file in /server
 ## morgan -- middleware logging library attached to express app
 
 gives you GET /todos 200 11 - 3.402 ms in the terminal when endpoint is accessed
+
+## cors
