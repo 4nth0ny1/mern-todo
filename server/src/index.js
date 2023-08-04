@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
 
+const router = require("./router");
+
 dotenv.config();
 
 // setup express server
@@ -10,10 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(morgan("tiny"));
-
-app.get("/todos", (req, res) => {
-  res.send("hello again");
-});
+app.use(router);
 
 // configure the app
 app.listen(8080);
