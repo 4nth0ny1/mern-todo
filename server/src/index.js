@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 
 app.get("/todos", (req, res) => {
-  res.send("hello anthony");
+  res.send("hello again");
 });
 
 // configure the app
