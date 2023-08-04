@@ -47,3 +47,8 @@ gives you GET /todos 200 11 - 3.402 ms in the terminal when endpoint is accessed
 ## create basic login endpoint
 
 ### create /src/router.js file
+
+## create loginRoute.js
+
+create /src/routes/loginRoute.js
+separated the loginRoute and required it in the router.js
