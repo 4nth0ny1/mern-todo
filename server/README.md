@@ -52,3 +52,34 @@ gives you GET /todos 200 11 - 3.402 ms in the terminal when endpoint is accessed
 
 create /src/routes/loginRoute.js
 separated the loginRoute and required it in the router.js
+
+## create login route with mock password
+
+after you add ...
+
+- console.log(req.body) to the loginRoute.js
+- PASSWORD=abc to the .env file
+
+### Postman
+
+POST: http://localhost:8080/login
+
+body => raw => Json
+
+```
+{
+    "password": "abc"
+}
+```
+
+### index.js
+
+add middleware
+app.use(express.json());
+
+### back to Postman
+
+send the request...
+console will read ...
+{ password: 'abc' }
+POST /login 200 16 - 9.752 ms
