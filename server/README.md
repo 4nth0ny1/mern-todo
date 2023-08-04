@@ -83,3 +83,14 @@ send the request...
 console will read ...
 { password: 'abc' }
 POST /login 200 16 - 9.752 ms
+
+### finish if else for password check in loginRoute.js
+
+## jwt token
+
+added jwt logic to the loginRoute.js
+added SECRET=123 to .env
+tested in Postman
+got token
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MTE5MDYyOX0.KUDMbnbzmFWu5mBjRyaigPiZLg0f80vAbC02HsknvRE
