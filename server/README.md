@@ -94,3 +94,15 @@ tested in Postman
 got token
 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MTE5MDYyOX0.KUDMbnbzmFWu5mBjRyaigPiZLg0f80vAbC02HsknvRE
+
+## create todos route
+
+### add this to router.js
+
+router.get("/todos", require("./routes/todosRoute"));
+
+### create src/routes/todosRoute.js
+
+module.exports = (req, res) => {
+res.send("success");
+};
