@@ -1,9 +1,29 @@
 import React from "react";
+import { useMutation, useQueryClient } from "react-query";
+import updateTodoRequest from "../api/updateTodoRequest";
 
-const TodoItem = ({ text, completed }) => {
+const TodoItem = ({ todo }) => {
+  const queryClient = useQueryClient();
+
+  const { mutate: toggleCompletion } = useMutation(
+    () => {
+      return updateTodoRequest({ ...todo, completed: !todo.completed });
+    },
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("todos");
+      },
+    }
+  );
+
   return (
     <div>
-      {text}: {completed ? " Complete" : " Not Complete"}
+      <input
+        checked={todo.completed}
+        type="checkbox"
+        onChange={toggleCompletion}
+      />
+      {todo.text}
     </div>
   );
 };

@@ -14,13 +14,7 @@ function App() {
         <ClipLoader size={150} />
       ) : (
         todos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo._id}
-              text={todo.text}
-              completed={todo.completed}
-            />
-          );
+          return <TodoItem key={todo._id} todo={todo} />;
         })
       )}
     </>
