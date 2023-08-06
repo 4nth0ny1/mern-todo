@@ -7,5 +7,6 @@ router.post("/login", require("./routes/loginRoute"));
 
 router.get("/todos", isLoggedIn, require("./routes/readTodosRoute"));
 router.post("/todos", isLoggedIn, require("./routes/createTodoRoute"));
+router.put("/todos/:id", isLoggedIn, require("./routes/updateTodoRoute"));
 
 module.exports = router;

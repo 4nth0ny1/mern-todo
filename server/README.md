@@ -254,3 +254,40 @@ module.exports = async (req, res) => {
 ```
 
 at this point, you can do a post in postman and then see that the data persists in the mongodb.
+
+## Update Todo Route
+
+### create /src/routes/updateTodoRoute.js
+
+```
+const TodoModel = require("../models/TodoModel");
+
+module.exports = async (req, res) => {
+  const { id } = req.params;
+  const todo = await TodoModel.findById(id);
+  todo.completed = req.body.completed;
+  todo.text = req.body.text;
+  await todo.save();
+  res.json(todo);
+};
+
+```
+
+### add route to router.js
+
+```
+router.put("/todos/:id", isLoggedIn, require("./routes/updateTodoRoute"));
+```
+
+### test in postman
+
+PUT http://localhost:8080/todos/64cfd2bb4296a4042205bf45
+
+```
+{
+    "text": "clean your house!",
+    "completed": true
+}
+```
+
+will now change the data in mongodb
