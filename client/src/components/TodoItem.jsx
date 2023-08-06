@@ -36,7 +36,6 @@ const TodoItem = ({ todo }) => {
           })
         }
       />
-      {todo.text}
     </div>
   );
 };
