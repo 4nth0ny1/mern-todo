@@ -2,8 +2,9 @@
 
 npm create vite .
 
-name: mern-todo
-type: react
-language: javascript
+- name: mern-todo
+- type: react
+- language: javascript
 
 npm install
+npm run dev
