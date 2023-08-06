@@ -19,6 +19,7 @@ const CreateTodoForm = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        if (!text) return;
         createTodo({ text });
       }}
     >
