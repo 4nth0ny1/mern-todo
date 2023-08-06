@@ -3,6 +3,7 @@ import readTodosRequest from "./api/readTodosRequest";
 import { useQuery } from "react-query";
 import ClipLoader from "react-spinners/ClipLoader";
 import TodoItem from "./components/TodoItem";
+import CreateTodoForm from "./components/CreateTodoForm";
 
 function App() {
   const { isLoading, data: todos } = useQuery("todos", readTodosRequest);
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
       <h1>Mern Todo App</h1>
+      <CreateTodoForm />
       {isLoading ? (
         <ClipLoader size={150} />
       ) : (
