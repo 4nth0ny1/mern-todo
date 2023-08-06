@@ -121,3 +121,7 @@ function App() {
 
 export default App;
 ```
+
+## fixing typing issue debounce
+
+npm i --save lodash
