@@ -1,14 +1,8 @@
 import "./App.css";
-import { useState, useEffect } from "react";
 import readTodosRequest from "./api/readTodosRequest";
+import { useQuery } from "react-query";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    readTodosRequest().then((allTodos) => setTodos(allTodos));
-  }, []);
-
   return (
     <>
       <h1>Mern Todo App</h1>
