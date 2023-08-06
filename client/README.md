@@ -8,3 +8,7 @@ npm create vite .
 
 npm install
 npm run dev
+
+## installing dependencies
+
+npm i --save react-query react-spinners
