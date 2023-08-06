@@ -68,3 +68,56 @@ export default App;
 ```
 
 ## React Query
+
+### update main.jsx for React Query
+
+```
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </React.StrictMode>
+);
+
+```
+
+### update App.jsx for React Query w/ Loading Spinner
+
+```
+import "./App.css";
+import readTodosRequest from "./api/readTodosRequest";
+import { useQuery } from "react-query";
+import ClipLoader from "react-spinners/ClipLoader";
+
+function App() {
+  const { isLoading, data: todos } = useQuery("todos", readTodosRequest);
+
+  return (
+    <>
+      <h1>Mern Todo App</h1>
+      {isLoading ? (
+        <ClipLoader size={150} />
+      ) : (
+        todos.map((todo) => {
+          return (
+            <div key={todo.id}>
+              {todo.text}: {todo.completed ? "Complete" : "Not Complete"}
+            </div>
+          );
+        })
+      )}
+    </>
+  );
+}
+
+export default App;
+```
