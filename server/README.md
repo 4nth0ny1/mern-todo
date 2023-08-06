@@ -229,3 +229,28 @@ module.exports = async (req, res) => {
 ### Test endpoint in postman
 
 When you do get request for /todos, at this point you should get [] because there aren't any todos.
+
+## Create Todo Route
+
+### index.js
+
+```
+router.post("/todos", isLoggedIn, require("./routes/createTodoRoute"));
+```
+
+### create /src/routes/createTodoRoute.js
+
+```
+const TodoModel = require("../models/TodoModel");
+
+module.exports = async (req, res) => {
+  const { text } = req.body;
+  const todo = new TodoModel({
+    text,
+  });
+  const newTodo = await todo.save();
+  res.json(newTodo);
+};
+```
+
+at this point, you can do a post in postman and then see that the data persists in the mongodb.

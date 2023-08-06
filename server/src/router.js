@@ -6,5 +6,6 @@ const router = express.Router();
 router.post("/login", require("./routes/loginRoute"));
 
 router.get("/todos", isLoggedIn, require("./routes/readTodosRoute"));
+router.post("/todos", isLoggedIn, require("./routes/createTodoRoute"));
 
 module.exports = router;
