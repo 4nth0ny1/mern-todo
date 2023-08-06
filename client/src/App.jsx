@@ -2,6 +2,7 @@ import "./App.css";
 import readTodosRequest from "./api/readTodosRequest";
 import { useQuery } from "react-query";
 import ClipLoader from "react-spinners/ClipLoader";
+import TodoItem from "./components/TodoItem";
 
 function App() {
   const { isLoading, data: todos } = useQuery("todos", readTodosRequest);
@@ -14,9 +15,11 @@ function App() {
       ) : (
         todos.map((todo) => {
           return (
-            <div key={todo.id}>
-              {todo.text}: {todo.completed ? "Complete" : "Not Complete"}
-            </div>
+            <TodoItem
+              key={todo._id}
+              text={todo.text}
+              completed={todo.completed}
+            />
           );
         })
       )}
