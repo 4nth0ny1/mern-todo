@@ -291,3 +291,29 @@ PUT http://localhost:8080/todos/64cfd2bb4296a4042205bf45
 ```
 
 will now change the data in mongodb
+
+## Delete Todo
+
+### create /src/routes/deleteTodoRoute.js
+
+```
+const TodoModel = require("../models/TodoModel");
+
+module.exports = async (req, res) => {
+  const { id } = req.params;
+  const todo = await TodoModel.findById(id);
+
+  await todo.deleteOne();
+  res.status(204).json(todo);
+};
+```
+
+### router.js
+
+```
+router.delete("/todos/:id", isLoggedIn, require("./routes/deleteTodoRoute"));
+```
+
+### test in postman
+
+confirmed
