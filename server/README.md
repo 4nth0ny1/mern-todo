@@ -183,3 +183,49 @@ module.exports = (req, res, next) => {
   }
 };
 ```
+
+## Mongo setup and TodoModel Schema
+
+after the mongodb setup, I added a .gitignore to ignore the .env file with mongo connection url
+verified the connection by modifying the index.js file.
+
+```
+mongoose.connect(process.env.MONGO_URI).then(() => {
+  console.log("starting on port 8080"); // if you see this in the terminal then the connection is established with mongo
+  app.listen(8080);
+});
+```
+
+### TodoModel Schema
+
+```
+const mongoose = require("mongoose");
+
+const TodoSchema = new mongoose.Schema({
+  text: {
+    type: String,
+  },
+  completed: {
+    type: Boolean,
+  },
+});
+
+const TodoModel = mongoose.model("Todo", TodoSchema);
+
+module.exports = TodoModel;
+```
+
+### rename TodosRoute to readTodosRoute
+
+```
+const TodoModel = require("../models/TodoModel");
+
+module.exports = async (req, res) => {
+  const todos = await TodoModel.find();
+  res.json(todos);
+};
+```
+
+### Test endpoint in postman
+
+When you do get request for /todos, at this point you should get [] because there aren't any todos.
