@@ -106,3 +106,55 @@ router.get("/todos", require("./routes/todosRoute"));
 module.exports = (req, res) => {
 res.send("success");
 };
+
+## authentication middleware
+
+### create src/middleware/isLoggedIn.js
+
+```
+module.exports = (req, res, next) => {};
+```
+
+### then go to postman
+
+http://localhost:8080/todos GET
+Headers
+Key=Authorization
+Value=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MTE5MDYyOX0.KUDMbnbzmFWu5mBjRyaigPiZLg0f80vAbC02HsknvRE
+
+### back to isLoggedIn.js
+
+```
+module.exports = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    res.status(401).send("invalid credentials");
+  } else {
+    const token = authHeader.split(" ")[1];
+    console.log(token);
+  }
+};
+```
+
+### router.js
+
+add the middleware to the router.js file for /todos
+this will require the user to have a token before seeing any of the /todos
+
+```
+const express = require("express");
+const isLoggedIn = require("./middleware/isLoggedIn");
+
+const router = express.Router();
+
+router.post("/login", require("./routes/loginRoute"));
+
+router.get("/todos", isLoggedIn, require("./routes/todosRoute"));
+
+module.exports = router;
+
+```
+
+### postman
+
+run the get request with the token in the headers and postman will hang, but check the terminal and the token will be in the console.
