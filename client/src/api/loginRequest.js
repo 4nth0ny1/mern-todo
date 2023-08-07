@@ -1,4 +1,4 @@
-import { API_URL, token } from "./config";
+import { API_URL } from "./config";
 
 export default (password) => {
   return fetch(`${API_URL}/login`, {
@@ -11,9 +11,9 @@ export default (password) => {
     }),
   }).then((response) => {
     if (response.ok) {
-      response.json();
+      return response.json();
     } else {
-      throw new Error("login failed");
+      throw new Error("Login failed");
     }
   });
 };

@@ -1,21 +1,27 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import updateTodoRequest from "../api/updateTodoRequest";
+import React, { useCallback, useState, useEffect, useContext } from "react";
+import { useQueryClient, useMutation, QueryClient } from "react-query";
 import deleteTodoRequest from "../api/deleteTodoRequest";
+import updateTodoRequest from "../api/updateTodoRequest";
 import { debounce } from "lodash";
+import { TokenContext } from "../App";
 
-const TodoItem = ({ todo }) => {
+export const TodoItem = ({ todo }) => {
   const [text, setText] = useState(todo.text);
+  const [token] = useContext(TokenContext);
+
   const queryClient = useQueryClient();
 
-  const { mutate: updateTodo } = useMutation((id) => updateTodoRequest(id), {
-    onSettled: () => {
-      queryClient.invalidateQueries("todos");
-    },
-  });
+  const { mutate: updateTodo } = useMutation(
+    (updatedTodo) => updateTodoRequest(updatedTodo, token),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("todos");
+      },
+    }
+  );
 
   const { mutate: deleteTodo } = useMutation(
-    (updatedTodo) => deleteTodoRequest(updatedTodo),
+    (updatedTodo) => deleteTodoRequest(updatedTodo, token),
     {
       onSettled: () => {
         queryClient.invalidateQueries("todos");
@@ -37,10 +43,22 @@ const TodoItem = ({ todo }) => {
   }, [text]);
 
   return (
-    <div>
+    <div
+      style={{
+        marginBottom: "6px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <input
         checked={todo.completed}
         type="checkbox"
+        style={{
+          marginRight: "5px",
+          height: "34px",
+          width: "34px",
+        }}
         onChange={() =>
           updateTodo({
             ...todo,
@@ -48,14 +66,30 @@ const TodoItem = ({ todo }) => {
           })
         }
       />
+
       <input
+        style={{
+          padding: "8px",
+          marginRight: "6px",
+        }}
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button onClick={() => deleteTodo(todo)}>del</button>
+
+      <button
+        style={{
+          padding: "5px",
+          height: "35px",
+          outline: "none",
+          border: "none",
+          color: "white",
+          backgroundColor: "#cc5a5a",
+        }}
+        onClick={() => deleteTodo(todo)}
+      >
+        delete
+      </button>
     </div>
   );
 };
-
-export default TodoItem;
