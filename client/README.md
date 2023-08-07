@@ -125,3 +125,7 @@ export default App;
 ## fixing typing issue debounce
 
 npm i --save lodash
+
+## login
+
+npm install react-router-dom@6

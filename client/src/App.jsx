@@ -1,24 +1,15 @@
 import "./App.css";
-import readTodosRequest from "./api/readTodosRequest";
-import { useQuery } from "react-query";
-import ClipLoader from "react-spinners/ClipLoader";
-import TodoItem from "./components/TodoItem";
-import CreateTodoForm from "./components/CreateTodoForm";
+import { Route, Routes } from "react-router-dom";
+import { TodoPage } from "./pages/TodoPage";
+import { LoginPage } from "./pages/LoginPage";
 
 function App() {
-  const { isLoading, data: todos } = useQuery("todos", readTodosRequest);
-
   return (
     <>
-      <h1>Mern Todo App</h1>
-      <CreateTodoForm />
-      {isLoading ? (
-        <ClipLoader size={150} />
-      ) : (
-        todos.map((todo) => {
-          return <TodoItem key={todo._id} todo={todo} />;
-        })
-      )}
+      <Routes>
+        <Route path="/" element={<TodoPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
     </>
   );
 }
